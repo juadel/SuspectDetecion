@@ -10,4 +10,3 @@ def request_sms(suspect):
     r = requests.post(url=API_endpoint, data=json.dumps(body), headers=headers)
     print("SMS send:%s"%r.text)
 
-request_sms("Juan")

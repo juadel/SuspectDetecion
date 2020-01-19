@@ -2,11 +2,11 @@ import face_recognition
 import cv2
 import numpy as np
 import os
-import requests
 
-API_endpoint = "https://d7x87km1tc.execute-api.ca-central-1.amazonaws.com/default/SuspectNotification"
 
-# Get a reference to webcam #0 (the default one)
+
+
+
 video_capture = cv2.VideoCapture("rtsp://admin:juancho8@192.168.2.31:554/CH001")
 suspectFolder = "LogicData"
 known_face_encodings =[]
