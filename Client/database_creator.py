@@ -23,19 +23,7 @@ def dataBaseCreator (image, name):
         print("no names encoding found")
         known_face_names=[]
 
-
-    # for file in logicDataFolder:
-    #     if file="./LogicData/logic_faces.dat":
-    #         known_face_encodings=load(file)
-    #     else:
-    #         known_face_encodings=[]
-       
-    # for file in logicDataFolder:
-    #     if file "./LogicData/logic_names.dat":
-    #         known_face_names = load(file)
-    #     else:
-    #         known_face_names=[]
-        
+           
     suspect_face = face_recognition.load_image_file(image)
     known_face_encodings.append(face_recognition.face_encodings(suspect_face)[0])
     known_face_names.append(name)
