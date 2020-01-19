@@ -2,6 +2,8 @@ import face_recognition
 import cv2
 import numpy as np
 import os
+from pickle import load
+from eventLogs import logger
 
 
 
@@ -9,29 +11,9 @@ import os
 
 video_capture = cv2.VideoCapture("rtsp://admin:juancho8@192.168.2.31:554/CH001")
 suspectFolder = "LogicData"
-known_face_encodings =[]
-for suspect in os.listdir(suspectFolder):
-    suspect_path= os.path.join(suspectFolder,suspect)
-    suspect_face = face_recognition.load_image_file(suspect_path)
-    print ("face detected")
-    known_face_encodings.append(face_recognition.face_encodings(suspect_face)[0])
-   
-
-
-
-# obama_image = face_recognition.load_image_file("obama.jpg")
-# obama_face_encoding = face_recognition.face_encodings(obama_image)[0]
-
-
-# biden_image = face_recognition.load_image_file("biden.jpg")
-# biden_face_encoding = face_recognition.face_encodings(biden_image)[0]
-
-# juan_image = face_recognition.load_image_file("juan.jpg")
-# juan_face_encoding = face_recognition.face_encodings(juan_image)[0]
-
-# Create arrays of known face encodings and their names
-#known_face_encodings = [juan_face_encoding]
-known_face_names = ["juan","Carolina","tomas"]
+known_face_encodings =load(open("./LogicData/logic_faces.dat","rb"))
+known_face_names = load(open("./LogicData/logic_names.dat","rb"))
+print(known_face_names)
 
 # Initialize some variables
 face_locations = []
@@ -71,12 +53,12 @@ while True:
             best_match_index = np.argmin(face_distances)
             if matches[best_match_index]:
                 name = known_face_names[best_match_index]
+                logger(name)
 
             face_names.append(name)
-            body = {'phone_number':'+17807103155','suspect':'Juan'}
-            r = requests.post(url=API_endpoint, data=body)
-            print("SMS send:%s"%r.text)
-
+            #logger(name)
+            
+            
     process_this_frame = not process_this_frame
 
 
