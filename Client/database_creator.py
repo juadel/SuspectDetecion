@@ -27,7 +27,7 @@ def dataBaseCreator (image, name):
     suspect_face = face_recognition.load_image_file(image)
     known_face_encodings.append(face_recognition.face_encodings(suspect_face)[0])
     known_face_names.append(name)
-    print(len(known_face_names))
+    #print(len(known_face_names))
     dump(known_face_encodings, open("./LogicData/logic_faces.dat","wb") )
     dump(known_face_names,open("./LogicData/logic_names.dat","wb"))
 

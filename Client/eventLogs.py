@@ -23,17 +23,14 @@ def logger(suspect_name):
             
         else: 
             event_logs[suspect_name] = now
-            #request_sms(suspect_name)
+            request_sms(suspect_name)
             print("Suspected reported")
     else:
         event_logs[suspect_name] = now
         print (event_logs)
         print("nueva visita de suspect")
-        #request_sms(suspect_name)    
+        request_sms(suspect_name)    
 
     
     dump(event_logs, open("./LogicData/events.dat","wb") )
 
-name = "juan"
-
-logger(name)
