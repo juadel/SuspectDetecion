@@ -13,7 +13,7 @@ video_capture = cv2.VideoCapture("rtsp://admin:juancho8@192.168.2.129:554/CH001"
 suspectFolder = "LogicData"
 known_face_encodings =load(open("./LogicData/logic_faces.dat","rb"))
 known_face_names = load(open("./LogicData/logic_names.dat","rb"))
-print(known_face_names)
+
 
 # Initialize some variables
 face_locations = []

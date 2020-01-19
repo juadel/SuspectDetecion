@@ -17,7 +17,7 @@ def lambda_handler(event, context):
     response = sns_client.publish(
         
         PhoneNumber= body['phone_number'],
-        Message = "Suspect: %s has been seen"%suspect_name,
+        Message = "Suspect: %s has been seen "%suspect_name,
         MessageAttributes = {
             'AWS.SNS.SMS.SenderID':{
                 'DataType': 'String',
