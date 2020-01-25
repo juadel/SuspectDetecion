@@ -1,25 +1,23 @@
 from tkinter import *
 from settings import cameraWindow, notificationWindow
 from database import addSuspectWin
-from face_detector import faceDetectorService
-import multiprocessing
+from face_detector import FaceDetectorProcess
 
-
-
-
-
-
-
+## Initialize a FaceDetector Process
+p = FaceDetectorProcess()
+# Graphics Interface
 window =Tk()
 
 window.title("Suspect Detector")
 ## WINDOWS SIZE AND FRAME SETTINGS
-window.geometry('{}x{}'.format(275,150))
+window.geometry('{}x{}'.format(275,100))
 top_frame = Frame(window,width=250, height=30, pady=6)
+status_frame = Frame(window, width=20, height = 10, pady=6)
 
-window.grid_rowconfigure(1, weight=2)
-window.grid_columnconfigure(1,weight=2)
-
+window.grid_rowconfigure(1, weight=1)
+window.grid_columnconfigure(1,weight=1)
+top_frame.grid(row=0, columnspan =3 )
+status_frame.grid(row=3, columnspan=3)
 
 ## END
 
@@ -48,32 +46,38 @@ window.config(menu=menubar)
 ## TEXT ON WINDOW
 chk_state = BooleanVar() 
 chk_state.set(False) 
-chk = Checkbutton(window, text='Show Camera', var=chk_state)
-chk.grid(column=1, row=10)
+chk = Checkbutton(top_frame, text='Show Camera', var=chk_state)
+chk.grid(column=1, row=3)
 
 
-p = multiprocessing.Process(target=faceDetectorService, args=(chk_state.get,))
 def startService():
-    #faceDetectorService(chk_state.get())
-    muProcess.append(p)
-    print ('Process before execution:', p, p.is_alive())
+    p.showVideoVariable = chk_state.get()
+    print ('Starting Video Capture:', p.live)
     p.start()
-    print ('Process running:', p, p.is_alive())
+    print ('Process running:', p.live)
+    btnStart.config(state="disabled")
+    btnStop.config(state="active")
     
    # p.join()
   
 
 def stopService():
-    p.terminate()
-    print ('Process terminated:', p, p.is_alive())
+    p.stop()
+    print ('Process terminated:', p, p.live)
+    btnStart.config(state="active")
+    btnStop.config(state="disabled")
+    
+
   
 
-btn = Button(text="START SERVICE", command=startService)
-btn.grid(column = 1, row = 1 )
-btn = Button(text="STOP SERVICE", command=stopService)
-btn.grid(column = 2, row = 1 )  
+btnStart = Button(top_frame, text="START SERVICE", command=startService)
+btnStart.grid(column = 1, row = 2)
+btnStop = Button(top_frame, text="STOP SERVICE", command=stopService)
+btnStop.grid(column = 2, row = 2 )  
 
-statusbar = Label(window, text="on the way…")
+status = Label(status_frame,text="Click Start button to activate server",relief=SUNKEN, anchor=W, bd=2)
+
+status.grid(row = 0)
 
 #statusbar.pack(side=BOTTOM, fill=X)
 
