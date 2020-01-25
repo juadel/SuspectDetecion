@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 from request_sms import request_sms
 wait_time = 5
 
-def logger(suspect_name):
+def logger(suspect_name, phone):
     
     try :
         event_logs=load(open("./LogicData/events.dat","rb"))
@@ -29,7 +29,7 @@ def logger(suspect_name):
         event_logs[suspect_name] = now
         print (event_logs)
         print("nueva visita de suspect")
-        request_sms(suspect_name)    
+        request_sms(suspect_name, phone)    
 
     
     dump(event_logs, open("./LogicData/events.dat","wb") )
