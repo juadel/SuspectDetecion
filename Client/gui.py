@@ -1,10 +1,12 @@
 from tkinter import *
-from settings import cameraWindow, notificationWindow
+from settings import Settings
 from database import addSuspectWin
 from face_detector import FaceDetectorProcess
 
+
 ## Initialize a FaceDetector Process
 p = FaceDetectorProcess()
+s = Settings()
 # Graphics Interface
 window =Tk()
 
@@ -26,8 +28,8 @@ status_frame.grid(row=3, columnspan=3)
 menubar =Menu(window)
 ## SETTINGS MENU
 settings_menu=Menu(menubar, tearoff=0)
-settings_menu.add_command(label="Camera", command= cameraWindow)
-settings_menu.add_command(label="Notifications", command= notificationWindow)
+settings_menu.add_command(label="Camera", command= s.cameraWindow)
+settings_menu.add_command(label="Notifications", command= s.notificationWindow)
 menubar.add_cascade(label="Settings", menu=settings_menu)
 ## DATABASE
 data_menu=Menu(menubar, tearoff=0)
