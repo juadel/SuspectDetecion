@@ -12,10 +12,11 @@ class FaceDetectorProcess():
         self.process = Process(target=self.run, args=())
         self.process.daemon = True
         self.showVideoVariable = False
-        self.live = Process.is_alive(self.process)
+        self.live = self.process.is_alive()
     
     def start(self):
         self.process.start()
+        self.live= self.process.is_alive()
     
     def stop(self):
         self.process.terminate()

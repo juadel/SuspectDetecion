@@ -52,34 +52,35 @@ chk.grid(column=1, row=3)
 
 def startService():
     p.showVideoVariable = chk_state.get()
-    print ('Starting Video Capture:', p.live)
+    print ('Starting Video Capture:')
     p.start()
     print ('Process running:', p.live)
     btnStart.config(state="disabled")
     btnStop.config(state="active")
+    if (p.live):
+        text.set("Server is Running")
     
-   # p.join()
   
 
 def stopService():
     p.stop()
-    print ('Process terminated:', p, p.live)
+    print ('Process terminated:',p.live)
     btnStart.config(state="active")
     btnStop.config(state="disabled")
+    text.set("Server Stopped")
     
-
-  
-
-btnStart = Button(top_frame, text="START SERVICE", command=startService)
-btnStart.grid(column = 1, row = 2)
-btnStop = Button(top_frame, text="STOP SERVICE", command=stopService)
-btnStop.grid(column = 2, row = 2 )  
-
-status = Label(status_frame,text="Click Start button to activate server",relief=SUNKEN, anchor=W, bd=2)
-
+text= StringVar()
+text.set("Press Start to proceed")
+status = Label(status_frame,textvariable=text,relief=SUNKEN, anchor=W, bd=2)
 status.grid(row = 0)
 
-#statusbar.pack(side=BOTTOM, fill=X)
+btnStart = Button(top_frame, text="START SERVER", command=startService)
+btnStart.grid(column = 1, row = 2)
+btnStop = Button(top_frame, text="STOP SERVER", command=stopService)
+btnStop.grid(column = 2, row = 2 )  
+
+
+
 
 window.mainloop()
 
