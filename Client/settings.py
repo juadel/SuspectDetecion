@@ -20,7 +20,10 @@ class Settings():
             print("Settings file found")
         except FileNotFoundError:
             print("no settings file")
-            os.mkdir("./Settings")
+            try: 
+                os.mkdir("./Settings")
+            except FileExistsError:
+                print("folder exist")
             settings={"user":"admin","password":"12345","ip":"192.168.2.100","phone":"+12345678910"}
         
         self.user = settings["user"]

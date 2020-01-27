@@ -30,21 +30,15 @@ def addSuspectWin():
         try :
             known_face_encodings=load(open("./LogicData/logic_faces.dat","rb"))
             print("face encoding found")
-        except FileNotFoundError:
-            print("no face encoding found")
-            os.mkdir("./LogicData")
-            known_face_encodings= []
-
-        try: 
             known_face_names = load(open("./LogicData/logic_names.dat","rb"))
             print("face names found")
-            print(known_face_names)
-
+            
         except FileNotFoundError:
-            print("no names encoding found")
+            print("no files found")
+            os.mkdir("./LogicData")
+            known_face_encodings= []
             known_face_names=[]
 
-            
         suspect_face = face_recognition.load_image_file(image)
         known_face_encodings.append(face_recognition.face_encodings(suspect_face)[0])
         known_face_names.append(name)

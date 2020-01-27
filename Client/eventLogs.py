@@ -11,7 +11,7 @@ def logger(suspect_name, phone):
         print("events Files do exist")
     except FileNotFoundError:
         print("no events logs found")
-        os.mkdir("./LogicData")
+        #os.mkdir("./LogicData")
         event_logs={}
 
     now = datetime.now()
